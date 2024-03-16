@@ -44,9 +44,18 @@ public class Seat extends JFrame {
 	private JButton btnPC2ON;
 	private long time = 0;
 	private String userid = null;
-	private boolean info = true;
-	private boolean button = false;
-
+	private boolean start01 = true;
+	private boolean stop01= false;
+	private boolean start02 = true;
+	private boolean stop02= false;
+	private boolean start03 = true;
+	private boolean stop03= false;
+	private boolean start04 = true;
+	private boolean stop04= false;
+	private boolean start05 = true;
+	private boolean stop05= false;
+	private boolean start06 = true;
+	private boolean stop06= false;
 	/**
 	 * Create the frame.
 	 */
@@ -86,10 +95,10 @@ public class Seat extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// 시작 버튼을 누르면 timer01 이 멈춤(계속 출력되던 글자 STOP), PC1번으로 로그인을 시도, button = true -> 종료
 				// 버튼을 활성화함
-				if (info == true) {
+				if (start01 == true) {
 					timer01.stop();
 					loginPC1();
-					button = true;
+					stop01 = true;
 				} else {
 					JOptionPane.showMessageDialog(null, "이미 사용중인 PC입니다.", "에러", JOptionPane.ERROR_MESSAGE);
 					setVisible(true);
@@ -107,8 +116,8 @@ public class Seat extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// 활성화 된 종료버튼
-				if (button == true) {
-					info = true;
+				if (stop01 == true) {
+					start01 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
 
@@ -151,7 +160,7 @@ public class Seat extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				timer02.stop();
 				loginPC2();
-				button = true;
+				stop02 = true;
 			}
 		});
 		btnPC2ON.setBackground(Color.LIGHT_GRAY);
@@ -163,8 +172,8 @@ public class Seat extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				if (button == true) {
-					info = true;
+				if (stop02 == true) {
+					start02 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
 					userdao.update(time, userid);
@@ -204,7 +213,7 @@ public class Seat extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				timer03.stop();
 				loginPC3();
-				button = true;
+				stop03 = true;
 			}
 		});
 		btnPC3ON.setForeground(Color.BLACK);
@@ -216,8 +225,8 @@ public class Seat extends JFrame {
 		btnPC3Off.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (button == true) {
-					info = true;
+				if (stop03 == true) {
+					start03 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
 					userdao.update(time, userid);
@@ -255,7 +264,7 @@ public class Seat extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				timer04.stop();
 				loginPC4();
-				button = true;
+				stop04 = true;
 
 			}
 		});
@@ -267,8 +276,8 @@ public class Seat extends JFrame {
 		btnPC4Off.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (button == true) {
-					info = true;
+				if (stop04 == true) {
+					start04 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
 					userdao.update(time, userid);
@@ -305,7 +314,7 @@ public class Seat extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				timer05.stop();
 				loginPC5();
-				button = true;
+				stop05 = true;
 			}
 		});
 		btnPC5ON.setBackground(Color.LIGHT_GRAY);
@@ -316,8 +325,8 @@ public class Seat extends JFrame {
 		btnPC5Off.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (button == true) {
-					info = true;
+				if (stop05 == true) {
+					start05 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
 					userdao.update(time, userid);
@@ -349,7 +358,7 @@ public class Seat extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				timer06.stop();
 				loginPC6();
-				button = true;
+				stop06 = true;
 			}
 		});
 		btnPC6ON.setBackground(Color.LIGHT_GRAY);
@@ -361,8 +370,8 @@ public class Seat extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				if (button == true) {
-					info = true;
+				if (stop06 == true) {
+					start06 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
 					userdao.update(time, userid);
