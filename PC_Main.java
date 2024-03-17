@@ -164,15 +164,10 @@ public class PC_Main {
 		frame.getContentPane().add(lblAreaTime);
 		
 		btnadmin = new JButton("관리자용");
-		btnadmin.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loginAdmain();
-			}
-
-		});
+	
 		btnadmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				loginAdmin();
 			}
 		});
 		btnadmin.setBounds(365, 327, 97, 23);
@@ -189,7 +184,7 @@ public class PC_Main {
 			String userId = txtUserID.getText();
 			
 			// 입력한 아이디에 시간을 충전한다
-			int result = userdao.update(usertime, userId); 
+			int result = userdao.updateTime(usertime, userId); 
 			
 			if (result == 1) {
 				lblresult.setText(" 충전이 완료 되었습니다 ");
@@ -218,7 +213,7 @@ public class PC_Main {
 		}
 
 	}
-	private void loginAdmain() {
+	private void loginAdmin() {
 		
 		userdao = UserDAOImple.getInstance();
 		String userid = JOptionPane.showInputDialog(null, "아이디를 입력하세요:", "로그인", JOptionPane.QUESTION_MESSAGE);
@@ -244,7 +239,13 @@ public class PC_Main {
 		// 입력된 아이디와 비밀번호 출력
 		JOptionPane.showMessageDialog(null, "환영합니다 : " + userid + "님 ", "로그인 성공", JOptionPane.INFORMATION_MESSAGE);
 
-		int result = userdao.checkuser(userid, userpw);
+		int result = userdao.checkAdmin();
+		
+		if (result == 1) {
+			userdao.select();
+		}else {
+			JOptionPane.showMessageDialog(null, "관리자가 아닙니다 "," 알림 " , JOptionPane.INFORMATION_MESSAGE);
+		}
 		
 	}
 }
