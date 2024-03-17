@@ -37,6 +37,23 @@ public class Seat extends JFrame {
 	private Thread timerThread4;
 	private Thread timerThread5;
 	private Thread timerThread6;
+	
+	private JTextArea textPC3;
+	private JLabel lblPC3;
+	private JButton btnPC3ON;
+	private JButton btnPC3Off;
+	private JTextArea textPC4;
+	private JLabel lblPC4;
+	private JButton btnPC4ON;
+	private JButton btnPC4Off;
+	private JTextArea textPC5;
+	private JLabel lblPC5;
+	private JButton btnPC5ON;
+	private JButton btnPC5Off;
+	private JTextArea textPC6;
+	private JButton btnPC6ON;
+	private JButton btnPC6Off;
+	private JLabel lblPC6;
 
 	private JLabel lblPC2;
 	private JButton btnPC2Off, btnPC1Off;
@@ -122,7 +139,10 @@ public class Seat extends JFrame {
 					seatdao = SeatDAOImple.getInstance();
 
 					// 종료버튼을 누른 시점에 사용자의 시간을 DB에 저장함
-					userdao.update(time, userid);
+					userdao.SaveTime(time, userid);
+					
+					System.out.println(time + userid);
+					
 					System.out.println("PC를 종료하고, 남은 시간 DB에 저장완료");
 					String pcNumber = Character.toString(lblPC1.getText().charAt(0));
 					int n = Integer.parseInt(pcNumber);
@@ -176,7 +196,7 @@ public class Seat extends JFrame {
 					start02 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
-					userdao.update(time, userid);
+					userdao.SaveTime(time, userid);
 					String pcNumber = Character.toString(lblPC2.getText().charAt(0));
 					int n = Integer.parseInt(pcNumber);
 					seatdao.DeleteSeat(n);
@@ -229,7 +249,7 @@ public class Seat extends JFrame {
 					start03 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
-					userdao.update(time, userid);
+					userdao.SaveTime(time, userid);
 					String pcNumber = Character.toString(lblPC3.getText().charAt(0));
 					int n = Integer.parseInt(pcNumber);
 					seatdao.DeleteSeat(n);
@@ -280,7 +300,7 @@ public class Seat extends JFrame {
 					start04 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
-					userdao.update(time, userid);
+					userdao.SaveTime(time, userid);
 					String pcNumber = Character.toString(lblPC4.getText().charAt(0));
 					int n = Integer.parseInt(pcNumber);
 					seatdao.DeleteSeat(n);
@@ -329,7 +349,7 @@ public class Seat extends JFrame {
 					start05 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
-					userdao.update(time, userid);
+					userdao.SaveTime(time, userid);
 					String pcNumber = Character.toString(lblPC5.getText().charAt(0));
 					int n = Integer.parseInt(pcNumber);
 					seatdao.DeleteSeat(n);
@@ -374,7 +394,7 @@ public class Seat extends JFrame {
 					start06 = true;
 					userdao = UserDAOImple.getInstance();
 					seatdao = SeatDAOImple.getInstance();
-					userdao.update(time, userid);
+					userdao.SaveTime(time, userid);
 					String pcNumber = Character.toString(lblPC6.getText().charAt(0));
 					int n = Integer.parseInt(pcNumber);
 					seatdao.DeleteSeat(n);
@@ -427,10 +447,8 @@ public class Seat extends JFrame {
 					String data = String.format("%02d분%02d초", minutes, seconds);
 
 					textPC1.setText("UserID :" + userId + "\n" + " 남은 시간 : " + data);
-					if (info == true) {
-						time = minutes;
-						userid = userId;
-					}
+					time = minutes;
+					userid = userId;
 					Thread.sleep(1000); // 1초
 				}
 
@@ -490,7 +508,7 @@ public class Seat extends JFrame {
 					String data = String.format("%02d분%02d초", minutes, seconds);
 
 					textPC2.setText("UserID :" + userId + "\n" + " 남은 시간 : " + data);
-					if (info == true) {
+					if (start02 == true) {
 						time = minutes;
 						userid = userId;
 					}
@@ -553,7 +571,7 @@ public class Seat extends JFrame {
 					String data = String.format("%02d분%02d초", minutes, seconds);
 
 					textPC3.setText("UserID :" + userId + "\n" + " 남은 시간 : " + data);
-					if (info == true) {
+					if (start03 == true) {
 						time = minutes;
 						userid = userId;
 					}
@@ -616,7 +634,7 @@ public class Seat extends JFrame {
 					String data = String.format("%02d분%02d초", minutes, seconds);
 
 					textPC4.setText("UserID :" + userId + "\n" + " 남은 시간 : " + data);
-					if (info == true) {
+					if (start04 == true) {
 						time = minutes;
 						userid = userId;
 					}
@@ -679,7 +697,7 @@ public class Seat extends JFrame {
 					String data = String.format("%02d분%02d초", minutes, seconds);
 
 					textPC5.setText("UserID :" + userId + "\n" + " 남은 시간 : " + data);
-					if (info == true) {
+					if (start05 == true) {
 						time = minutes;
 						userid = userId;
 					}
@@ -742,7 +760,7 @@ public class Seat extends JFrame {
 					String data = String.format("%02d분%02d초", minutes, seconds);
 
 					textPC6.setText("UserID :" + userId + "\n" + " 남은 시간 : " + data);
-					if (info == true) {
+					if (start06 == true) {
 						time = minutes;
 						userid = userId;
 					}
@@ -830,7 +848,7 @@ public class Seat extends JFrame {
 				seatdao.loginSeat(vo, n); // 회원 아이디,비번을 이용해서 자리에 로그인. , SEAT_INFO에 회원정보를 넣는다
 
 				System.out.println("자리에 연결완료");
-				info = false;
+				start01 = false;
 
 				// 유저 아이디, 시간을 화면에 출력
 				viewPC1(userid, usertime);
@@ -902,6 +920,7 @@ public class Seat extends JFrame {
 				seatdao.loginSeat(vo, n); // 회원 아이디,비번을 이용해서 자리에 로그인. , SEAT_INFO에 회원정보를 넣는다
 
 				System.out.println("자리에 연결완료");
+				start02 = false;
 
 				// 유저 아이디, 시간을 화면에 출력
 				viewPC2(userid, usertime);
@@ -973,6 +992,8 @@ public class Seat extends JFrame {
 				seatdao.loginSeat(vo, n); // 회원 아이디,비번을 이용해서 자리에 로그인. , SEAT_INFO에 회원정보를 넣는다
 
 				System.out.println("자리에 연결완료");
+				start03 = false;
+
 
 				// 유저 아이디, 시간을 화면에 출력
 				viewPC3(userid, usertime);
@@ -1044,6 +1065,8 @@ public class Seat extends JFrame {
 				seatdao.loginSeat(vo, n); // 회원 아이디,비번을 이용해서 자리에 로그인. , SEAT_INFO에 회원정보를 넣는다
 
 				System.out.println("자리에 연결완료");
+				start05 = false;
+
 
 				// 유저 아이디, 시간을 화면에 출력
 				viewPC4(userid, usertime);
@@ -1115,6 +1138,8 @@ public class Seat extends JFrame {
 				seatdao.loginSeat(vo, n); // 회원 아이디,비번을 이용해서 자리에 로그인. , SEAT_INFO에 회원정보를 넣는다
 
 				System.out.println("자리에 연결완료");
+				start06 = false;
+
 
 				// 유저 아이디, 시간을 화면에 출력
 				viewPC5(userid, usertime);
@@ -1256,21 +1281,6 @@ public class Seat extends JFrame {
 		}
 	});
 
-	private JTextArea textPC3;
-	private JLabel lblPC3;
-	private JButton btnPC3ON;
-	private JButton btnPC3Off;
-	private JTextArea textPC4;
-	private JLabel lblPC4;
-	private JButton btnPC4ON;
-	private JButton btnPC4Off;
-	private JTextArea textPC5;
-	private JLabel lblPC5;
-	private JButton btnPC5ON;
-	private JButton btnPC5Off;
-	private JTextArea textPC6;
-	private JButton btnPC6ON;
-	private JButton btnPC6Off;
-	private JLabel lblPC6;
+
 
 } // end Seat
