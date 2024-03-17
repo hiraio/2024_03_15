@@ -27,6 +27,18 @@ public interface OracleUserQuery {
 	   public static final String SQL_SELECT_ID =
 	         "SELECT " + COL_USER_ID + " FROM " + TABLE_NAME_USER + 
 	         " WHERE " + COL_USER_ID + " = ?";
+	   // 관리자인지 아닌지 확인
+	   public static final String SQL_SELECT_ADMIN =
+		         "SELECT " + COL_USER_ID + " FROM " + TABLE_NAME_USER + 
+		         " WHERE " + COL_USER_ID + " = admin " +"AND " + COL_USER_PW + " = admin";
+	   
+	   
+	   // - 회원 정보 전체 검색
+	   // SELECT * FROM T_MEMBER;
+	   public static final String SQL_SELECT = 
+	         "SELECT * FROM " + TABLE_NAME_USER;
+
+	   
 	   
 	 // 사용자 아이디중복 확인
 	   public static final String SQL_CHECK_ID =
@@ -63,10 +75,17 @@ public interface OracleUserQuery {
 
 	   // 사용자 시간 수정 (추가)
 	   
-	   public static final String SQL_UPDATE_TIME = 
+	   public static final String SQL_UPDATE_TIME_CHARGE = 
 			   "UPDATE " + TABLE_NAME_USER + " SET " +
 					   COL_USER_TIME + " = " + COL_USER_TIME + " + ? " +
 					   "WHERE " + COL_USER_ID + " = ?";
+	   
+	   public static final String SQL_UPDATE_TIME_SAVE = 
+			   "UPDATE " + TABLE_NAME_USER + " SET " +
+					   COL_USER_TIME + " = ? " +
+					   "WHERE " + COL_USER_ID + " = ?";
+	   
+	   
 					   
 	   
 	   // 사용자 남은 시간 출력, 저장
