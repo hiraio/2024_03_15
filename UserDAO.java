@@ -1,6 +1,6 @@
 package edu.java.side;
 
-
+import java.util.ArrayList;
 
 public interface UserDAO {
 
@@ -15,8 +15,11 @@ public interface UserDAO {
 //	3. 사용자 정보 가져오기 - 아이디,이름, 남은시간
 	public abstract UserVO selectInfo(String userId);
 	
-//	4. 사용자 남은 시간 수정(추가)
-	public abstract int update(Long usertime, String userId);
+//	4. 사용자 시간 수정(추가) 충전시
+	public abstract int updateTime(Long usertime, String userId);
+//  4.2 사용자 남은 시간 저장
+	
+	public abstract int SaveTime(Long usertime, String userId);
 	
 //	5. 사용자 남은 시간 출력
 	public abstract UserVO selectTime(String userId); // 실시간으로 계속 남은 시간이 출력되는 것
@@ -26,4 +29,12 @@ public interface UserDAO {
 	
 // 7. 아이디 중복 확인
 	public abstract int isDuplicate(String userId);
+// 8. 관리자인지 아닌지 체크
+	public abstract int checkAdmin();
+// 9 회원 정보 전체 검색
+	public abstract ArrayList<UserVO>select();	
+
+	
 }
+
+
